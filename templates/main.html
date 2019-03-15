@@ -66,16 +66,18 @@ let timerCallback = function() {
                 imgName: "webcam.png"
             }
         }).done(function(data) {
-            result=parseFloat(data)
-            if (result == -1){ document.getElementById("smile").innerHTML = "face not detected :((";}
+            var result=JSON.parse(data)
+            if (result.detection_result == -1){ document.getElementById("smile").innerHTML = "face not detected :((";}
             else {
-                if (result >= 0.5) {
+                if (result.detection_result >= 0.5) {
                     document.getElementById("smile").innerHTML = "smile not detected :(";
                 }
                 else {
                     document.getElementById("smile").innerHTML = "smile";
                 }
             }
+            canvas_ctx.fillStyle = "rgb(100, 100, 200)";
+            canvas_ctx.fillRect(parseInt(result.x[0]),parseInt(result.y[0]),parseInt(result.w[0]),parseInt(result.h[0]));
         });
 
     }

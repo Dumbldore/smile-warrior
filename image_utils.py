@@ -57,7 +57,7 @@ def extract_faces(img, cascade):
     )
     faces_list = {"face_cropped": [], "x": [], "w": [], "y": [], "h": []}
     for (x, y, w, h) in faces:
-        faces_list["face_cropped"].append(img[x:x + w, y:y + h])
+        faces_list["face_cropped"].append(img[y:y + h, x:x + w])
         faces_list["x"].append(str(x))
         faces_list["y"].append(str(y))
         faces_list["w"].append(str(w))

@@ -59,7 +59,8 @@ def classify():
     try:
         img_dictionary_faces = prepare_faces(img_cv2)
     except ValueError as v:
-        return str(v)
+        #faces_list = {"detection_result": "-1"}
+        return json.dumps({"detection_result": "-1"})
     img_dictionary_faces["detection_result"] = smile_detecting(img_dictionary_faces["ready_face"], model)
     img_dictionary_faces.pop("ready_face")
     img_dictionary_faces = json.dumps(img_dictionary_faces)

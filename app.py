@@ -15,6 +15,7 @@ import time
 app = Flask(__name__)
 
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Input of model, weights and cascade path')
     parser.add_argument('--cascade', required=True, type=str,
@@ -67,7 +68,7 @@ def classify():
     img_dictionary_faces["detection_result"] = smile_detecting(img_dictionary_faces["ready_face"], model)
     img_dictionary_faces.pop("ready_face")
     if int(zapisywanie) == 1 and float(img_dictionary_faces["detection_result"]) < 0.5:
-        cv2.imwrite("photo{}.jpg".format( time.time()), img_cv2)
+        cv2.imwrite("xxx\photo{}.jpg".format( time.time()), img_cv2)
     img_dictionary_faces = json.dumps(img_dictionary_faces)
     return img_dictionary_faces
 

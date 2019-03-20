@@ -125,7 +125,7 @@ let timerCallback = function() {
                     zapisywanie = -1;
                     document.getElementById('button').innerHTML = 'Photo save: INACTIVE';
 
-                    document.getElementById("smile").innerHTML = "smile detected in " + ((1-smile_ratio)*100) + "%";
+                    document.getElementById("smile").innerHTML = "smile detected in " +     Math.round((1-smile_ratio)*100) + "%";
                 }
             }
 
@@ -133,7 +133,7 @@ let timerCallback = function() {
         });
 
     }
-    setTimeout(timerCallback, 40);
+    setTimeout(timerCallback, 100);
 
 }
 

@@ -64,9 +64,8 @@ def classify():
         return json.dumps({"detection_result": "-1"})
     img_dictionary_faces["detection_result"] = smile_detecting(img_dictionary_faces["ready_face"], model)
     img_dictionary_faces.pop("ready_face")
-    if float(img_dictionary_faces["detection_result"]) < 0.4:
-        if zapisywanie == 1:
-            cv2.imwrite("fotka.jpg", img_cv2)
+    if int(zapisywanie) == 1 and float(img_dictionary_faces["detection_result"]) < 0.5:
+        cv2.imwrite("fotka.jpg", img_cv2)
     img_dictionary_faces = json.dumps(img_dictionary_faces)
     return img_dictionary_faces
 

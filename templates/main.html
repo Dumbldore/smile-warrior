@@ -123,6 +123,8 @@ let timerCallback = function() {
                 }
                 else {
                     zapisywanie = -1;
+                    document.getElementById('button').innerHTML = 'Photo save: INACTIVE';
+
                     document.getElementById("smile").innerHTML = "smile detected in " + ((1-smile_ratio)*100) + "%";
                 }
             }

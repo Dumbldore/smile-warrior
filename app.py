@@ -8,6 +8,8 @@ import argparse
 import numpy as np
 import cv2
 import json
+import time
+
 
 # creates a Flask application, named app
 app = Flask(__name__)
@@ -65,7 +67,7 @@ def classify():
     img_dictionary_faces["detection_result"] = smile_detecting(img_dictionary_faces["ready_face"], model)
     img_dictionary_faces.pop("ready_face")
     if int(zapisywanie) == 1 and float(img_dictionary_faces["detection_result"]) < 0.5:
-        cv2.imwrite("fotka.jpg", img_cv2)
+        cv2.imwrite("photo{}.jpg".format( time.time()), img_cv2)
     img_dictionary_faces = json.dumps(img_dictionary_faces)
     return img_dictionary_faces
 

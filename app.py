@@ -19,8 +19,8 @@ def parse_args():
                         help='OpenCV cascade file path')
     parser.add_argument('--model', required=True, type=str,
                         help='Model address path', default="model.hdf5")
-    parser.add_argument('--weight', required=True, type=str,
-                        help='Model weights path')
+   # parser.add_argument('--weight', required=True, type=str,
+                      #  help='Model weights path')
     return parser.parse_args()
 
 
@@ -55,7 +55,9 @@ def data_uri_to_cv2_img(url):
 def classify():
     print("got request")
     data_url = request.form.get('imgBase64')
+    zapisywanie = request.form.get('int')
     img_cv2 = data_uri_to_cv2_img(data_url)
+    cv2.imwrite("fotka.jpg", img_cv2)
     try:
         img_dictionary_faces = prepare_faces(img_cv2)
     except ValueError as v:
@@ -63,6 +65,10 @@ def classify():
         return json.dumps({"detection_result": "-1"})
     img_dictionary_faces["detection_result"] = smile_detecting(img_dictionary_faces["ready_face"], model)
     img_dictionary_faces.pop("ready_face")
+    if float(img_dictionary_faces["detection_result"]) < 0.4:
+        print("----------->>>>" + zapisywanie)
+        if zapisywanie == 1:
+            cv2.imwrite("fotka.jpg", img_cv2)
     img_dictionary_faces = json.dumps(img_dictionary_faces)
     return img_dictionary_faces
 
@@ -72,9 +78,9 @@ if __name__ == "__main__":
     args = parse_args()
     cascade = args.cascade
     model = args.model
-    weight = args.weight
+    #weight = args.weight
     graph = tf.get_default_graph()
     model = load_model(model)
-    model.load_weights(weight)
+    #model.load_weights(weight)
     print('loaded everything :)')
     app.run(debug=False)

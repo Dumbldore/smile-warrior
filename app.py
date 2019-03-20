@@ -57,7 +57,6 @@ def classify():
     data_url = request.form.get('imgBase64')
     zapisywanie = request.form.get('int')
     img_cv2 = data_uri_to_cv2_img(data_url)
-    cv2.imwrite("fotka.jpg", img_cv2)
     try:
         img_dictionary_faces = prepare_faces(img_cv2)
     except ValueError as v:
@@ -66,7 +65,6 @@ def classify():
     img_dictionary_faces["detection_result"] = smile_detecting(img_dictionary_faces["ready_face"], model)
     img_dictionary_faces.pop("ready_face")
     if float(img_dictionary_faces["detection_result"]) < 0.4:
-        print("----------->>>>" + zapisywanie)
         if zapisywanie == 1:
             cv2.imwrite("fotka.jpg", img_cv2)
     img_dictionary_faces = json.dumps(img_dictionary_faces)

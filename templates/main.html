@@ -69,6 +69,12 @@ var zapisywanie = -1;
 
 function myFunction() {
   zapisywanie = zapisywanie *-1;
+    if (zapisywanie == 1) {
+        document.getElementById('button').innerHTML = ' Photo save: ACTIVE';
+    }
+    else{
+        document.getElementById('button').innerHTML = 'Photo save: INACTIVE';
+    }
 }
 
 const constraints = {
@@ -113,7 +119,7 @@ let timerCallback = function() {
                 canvas_ctx.rect(parseInt(result.x[0]),parseInt(result.y[0]),parseInt(result.w[0]),parseInt(result.h[0]));
                 canvas_ctx.stroke();
                 if (smile_ratio >= 0.5) {
-                    document.getElementById("smile").innerHTML = "smile not detected :(" + zapisywanie;
+                    document.getElementById("smile").innerHTML = "smile not detected :(";
                 }
                 else {
                     zapisywanie = -1;
